@@ -1,14 +1,11 @@
-from djoser.serializers import UserSerializer
-from djoser.views import UserViewSet
+from django.contrib.auth.models import User
+
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 
+from .serializers import PostSerializer, UserSerializer
 from .paginator import PagePaginator
 from .models import Post
-from .serializers import PostSerializer
-
-
-
 
 class PostViewSet(ModelViewSet):
     queryset = Post.objects.all()
@@ -16,4 +13,6 @@ class PostViewSet(ModelViewSet):
     permission_classes = [IsAuthenticated]
     pagination_class = PagePaginator
 
-
+class UserViewSet(ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
